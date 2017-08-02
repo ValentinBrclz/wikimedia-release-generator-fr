@@ -1,5 +1,5 @@
 Contributing
-===============================
+=============
 
 Pull requests and issues from everyone are welcomed.
 
