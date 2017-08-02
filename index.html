@@ -27,304 +27,328 @@
  */
  -->
 <html>
-  <head>
-    <title>Wikimedia OTRS release generator</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="//tools-static.wmflabs.org/cdnjs/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//tools-static.wmflabs.org/static/jquery-ui/1.11.1/jquery-ui.css">
-    <style>
-      p {
-          background-color: white;
-      }
-      .hof {
-          height: 100vh;
-          overflow-y: auto;
-      }
-      .dropdown-menu li {
-          cursor: pointer;
-      }
-    </style>
-    <script type="text/javascript" src="//tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script type="text/javascript" src="//tools-static.wmflabs.org/cdnjs/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script>
-      $(document).ready(function(){
-          $("a.smsc").on("click", function(event) {
-              event.preventDefault();
-              var hash = this.hash;
-              $("html, body").animate({
-                  scrollTop: $(hash).offset().top
-              }, 400);
-          });
-          $("#meta").popover({
-              html:true,
-          });
-          $("form").on("keyup keypress", function(e) {
-              if (e.keyCode == 13) {
-                  e.preventDefault();
-              }
-          });
-          $(".nt").on("keydown", function(e) {
-              if (e.keyCode == 9) {
-                  e.preventDefault()
-              }
-          });
-      });
+<head>
+	<title>Wikimedia OTRS - Générateur de déclaration de consentement</title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="//tools-static.wmflabs.org/cdnjs/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//tools-static.wmflabs.org/static/jquery-ui/1.11.1/jquery-ui.css">
+	<style>
+		body {
+			overflow: hidden;
+		}
 
-      function s1v() {
-          s1vi = 0;
-          if (!$("#namei").val().match(/\S/)) {
-              if (!$("#s1fg1").hasClass("has-error")) {
-                  $("#s1fg1").addClass("has-error");
-              }
-              s1vi++;
-          } else {
-              if ($("#s1fg1").hasClass("has-error")) {
-                  $("#s1fg1").removeClass("has-error");
-              }
-          }
-          if ($("#irep").css("display") != "none") {
-              if (!$("#repi").val().match(/\S/)) {
-                  if (!$("#s1fg2").hasClass("has-error")) {
-                      $("#s1fg2").addClass("has-error");
-                  }
-                  s1vi++;
-              } else {
-                  if ($("#s1fg2").hasClass("has-error")) {
-                      $("#s1fg2").removeClass("has-error");
-                  }
-              }
-              if (!$("#authi").val().match(/\w/)) {
-                  if (!$("#s1fg3").hasClass("has-error")) {
-                      $("#s1fg3").addClass("has-error");
-                  }
-                  s1vi++;
-              } else {
-                  if ($("#s1fg3").hasClass("has-error")) {
-                      $("#s1fg3").removeClass("has-error");
-                  }
-              }
-          }
-          if (s1vi == 0) {
-              $("html, body").animate({
-                  scrollTop: $(s2).offset().top
-              }, 400);
-          }
-      }
-      function s4v() {
-          if (!$("#licensei").val().match(/\w/)) {
-              if (!$("#s4fg").hasClass("has-error")) {
-                  $("#s4fg").addClass("has-error");
-              }
-          } else {
-              $("form").submit();
-          }
-      }
-    </script>
-  </head>
-  <body style="background: url('bg.png') no-repeat fixed right bottom; overflow:hidden;">
+		p {
+			background-color: white;
+		}
 
-      <div class="container">
-      <h1>Wikimedia OTRS release generator <small><a id="meta" tabindex="0" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="created and maintained by <a href='//meta.wikimedia.org/wiki/User:FDMS4' target='_blank'>FDMS</a><br />© (<a href='//joinup.ec.europa.eu/sites/default/files/eupl1.1.-licence-en_0.pdf' target='_blank'>EUPL 1.1</a>) <a href='http://fdms.eu' target='_blank'>Stöger Florian D. M.</a>" style="color:#777;"><?=$relgen?></a></small></h1>
+		.gray-text {
+			color: #777;
+		}
 
-      <form method="post" action="//tools.wmflabs.org/relgen/index.php">
+		.black-text {
+			color: #333;
+		}
 
-        <div id="s0" class="row hof"> <!-- step 0 -->
-          <br /><br />
-          <div class="col-md-7">
-          <a role="button" href="#s1" class="btn btn-primary btn-lg btn-block smsc nt">start</a>
-          <input type="hidden" name="starttime" value="<?=$starttime?>" />
-          <input type="hidden" name="result" value="1" />
-          </div><br />
-        </div>
+		.hof {
+			height: 100vh;
+			overflow-y: auto;
+		}
 
-        <div id="s1" class="row hof"> <!-- step 1 -->
-          <br />
-          step 1 of 5 [ <a href="//commons.wikimedia.org/wiki/Commons:Help_desk?action=edit&section=new&preloadtitle=help+with+Wikimedia+OTRS+release+generator+step+1" target="_blank">help</a> | <a href="//commons.wikimedia.org/wiki/User_talk:FDMS4?action=edit&section=new&preloadtitle=Wikimedia+OTRS+release+generator+feedback" target="_blank">feedback</a> ]
-          <br /><br />
-          <div class="col-md-7">
-            <div class="button" data-toggle="buttons">
-              <label class="btn btn-default btn-block" onclick="$('#iam').show();$('#irep').hide();$('#idk').hide();"><input type="radio" id="s11" name="s1" value="1" />I am the copyright holder</label>
-              <label class="btn btn-default btn-block" onclick="$('#iam').show();$('#irep').show();$('#idk').hide();"><input type="radio" id="s12" name="s1" value="2" />I represent the copyright holder</label>
-              <label class="btn btn-default btn-block" onclick="$('#iam').hide();$('#irep').hide();$('#idk').show();"><input type="radio" id="s13" name="s1" value="" />I don't know the copyright holder</label>
-            </div>
-            <br />
-            <p>The copyright holder of a media work is the <b>person who created it</b> (photographer, designer, painter, …), unless the copyright was explicitly transferred by an operation of law or contract.</p>
-            <br /><br />
-          </div>
-          <div class="col-md-4">
-            <div style="display:none;" id="iam">
-              my name<br /><div id="s1fg1" class="form-group"><input id="namei" type="text" name="name" value="<?php echo $name;?>" placeholder="John Doe (required)" class="form-control" /></div>
-              <div style="display:none;" id="irep">
-                <br />
-                copyright holder<br /><div id="s1fg2" class="form-group"><input id="repi" type="text" name="rep" value="<?php echo $rep;?>" placeholder="Ace Inc. / Jane Roe (required)" class="form-control" /></div>
-                <br />
-                my authority<br /><div id="s1fg3" class="form-group"><input id="authi" type="text" name="auth" value="<?php echo $auth;?>" placeholder="CEO, appointed representative, … (required)" class="form-control" /></div>
-              </div>
-              <br /><br />
-              <a role="button" class="btn btn-primary btn-block nt" onclick="s1v()">proceed to the next step</a>
-            </div>
-            <div style="display:none;" id="idk">
-              <p class="text-danger">Wikimedia OTRS cannot accept a release from you – please <a href="//commons.wikimedia.org/wiki/Commons:OTRS#notch">reach out to the copyright holder</a> instead.</p>
-            </div>
-          </div>
-          <br />
-        </div>
+		.dropdown-menu li {
+			cursor: pointer;
+		}
+	</style>
+	<script type="text/javascript" src="//tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script type="text/javascript" src="//tools-static.wmflabs.org/cdnjs/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script>
+		/**
+		 * ON Ready
+		 */
+        $(document).ready(function () {
+            $("a.smsc").on("click", function (event) {
+                event.preventDefault();
+                var hash = this.hash;
+                $("html, body").animate({
+                    scrollTop: $(hash).offset().top
+                }, 400);
+            });
+            $("#meta").popover({
+                html: true
+            });
+            $("form").on("keyup keypress", function (e) {
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                }
+            });
+            $(".nt").on("keydown", function (e) {
+                if (e.keyCode === 9) {
+                    e.preventDefault()
+                }
+            });
+        });
 
-        <div id="s2" class="row hof"> <!-- step 2 -->
-          <br />
-          step 2 of 5 [ <a href="#s1" class="smsc">back</a> | <a href="//commons.wikimedia.org/wiki/Commons:Help_desk?action=edit&section=new&preloadtitle=help+with+Wikimedia+OTRS+release+generator+step+2" target="_blank">help</a> | <a href="//commons.wikimedia.org/wiki/User_talk:FDMS4?action=edit&section=new&preloadtitle=Wikimedia+OTRS+release+generator+feedback" target="_blank">feedback</a> ]
-          <br /><br />
-          <div class="col-md-7">
-            <div class="button" data-toggle="buttons">
-              <label class="btn btn-default btn-block" onclick="$('#iup').show();$('#iatt').show();"><input type="radio" id="s21" name="s2" value="1" />I or others have already uploaded the file to Wikimedia Commons</label>
-              <label class="btn btn-default btn-block" onclick="$('#iup').hide();$('#iatt').show();"><input type="radio" id="s22" name="s2" value="2" />I will attach the file to the eMail</label>
-            </div>
-            <br />
-            <p>Please use the <a href="//commons.wikimedia.org/wiki/Special:UploadWizard" target="_blank"><b>UploadWizard</b></a> to upload the file to Wikimedia Commons if you haven't done so already.</p>
-            <p>To prevent the file from getting deleted while your release eMail is awaiting processing by the Wikimedia OTRS team, you may place <b><samp>{{subst:OP}}</samp></b> on the file description page.</p>
-            <br /><br />
-          </div>
-          <div class="col-md-4">
-            <div style="display:none;" id="iatt">
-              <div style="display:none;" id="iup">
-                Wikimedia Commons file name<br /><input type="text" name="filer" placeholder="Example.jpg (required)" class="form-control" />
-                <br /><br />
-              </div>
-              <a role="button" href="#s3" class="btn btn-primary btn-block smsc nt">proceed to the next step</a>
-            </div>
-          </div>
-          <br />
-        </div>
+        /**
+         * Validate the data of first step
+         */
+        function s1v() {
+            var s1vi = 0;
 
-        <div id="s3" class="row hof"> <!-- step 3 -->
-          <br />
-          step 3 of 5 [ <a href="#s2" class="smsc">back</a> | <a href="//commons.wikimedia.org/wiki/Commons:Help_desk?action=edit&section=new&preloadtitle=help+with+Wikimedia+OTRS+release+generator+step+3" target="_blank">help</a> | <a href="//commons.wikimedia.org/wiki/User_talk:FDMS4?action=edit&section=new&preloadtitle=Wikimedia+OTRS+release+generator+feedback" target="_blank">feedback</a> ]
-          <br /><br />
-          <div class="col-md-7">
-            <div class="button" data-toggle="buttons">
-              <label class="btn btn-default btn-block" onclick="$('#i3').show();"><input type="radio" id="s31" name="s3" value="1" />I want to release the media work</label>
-              <label class="btn btn-default btn-block" onclick="$('#i3').show();"><input type="radio" id="s32" name="s3" value="2" />I want to release the work depicted in the media work</label>
-              <label class="btn btn-default btn-block" onclick="$('#i3').show();"><input type="radio" id="s33" name="s3" value="3" />I want to release both the work depicted and the media work</label>
-            </div>
-            <br />
-            <p>If the media work depicts or otherwise includes someone else's artwork in a non-trivial manner, it is a <a href="//commons.wikimedia.org/wiki/Commons:Derivative_works" target="_blank"><b>derivative work</b></a> and therefore a separate release from the copyright holder of the depicted artwork is generally required.</p>
-            <p>In some countries, thanks to the <a href="//commons.wikimedia.org/wiki/Commons:Freedom_of_panorama" target="_blank"><b>freedom of panaroma</b></a> exception, architecture and other artwork on permanent public display are exempted from this requirement. In the United States, only architecture is exempted.</p>
-            <br /><br />
-          </div>
-          <div class="col-md-4">
-            <div style="display:none;" id="i3">
-              <a role="button" href="#s4" class="btn btn-primary btn-block smsc nt">proceed to the next step</a>
-            </div>
-          </div>
-          <br />
-        </div>
-
-        <div id="s4" class="row hof"> <!-- step 4 -->
-          <br />
-          step 4 of 5 [ <a href="#s3" class="smsc">back</a> | <a href="//commons.wikimedia.org/wiki/Commons:Help_desk?action=edit&section=new&preloadtitle=help+with+Wikimedia+OTRS+release+generator+step+4" target="_blank">help</a> | <a href="//commons.wikimedia.org/wiki/User_talk:FDMS4?action=edit&section=new&preloadtitle=Wikimedia+OTRS+release+generator+feedback" target="_blank">feedback</a> ]
-          <br /><br />
-          <div class="col-md-7">
-            <p>I agree to publish the above-mentioned content under the following free license:</p>
-            <div id="s4fg" class="form-group"><div class="input-group">
-              <input id="licensei" type="text" name="license" value="Creative Commons Attribution-ShareAlike 4.0 International" class="form-control" />
-              <div class="input-group-btn">
-                <a role="button" data-toggle="dropdown" class="btn btn-default"><span class="caret" /></a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a onclick="$('#licensei').val('Creative Commons Attribution-ShareAlike 4.0 International'); $('#iawattr').show();">Creative Commons Attribution-ShareAlike 4.0 International</a></li>
-                  <li><a onclick="$('#licensei').val('Creative Commons Attribution 4.0 International'); $('#iawattr').show();">Creative Commons Attribution 4.0 International</a></li>
-                  <li><a onclick="$('#licensei').val('Creative Commons CC0 1.0 Universal'); $('#iawattr').hide();">Creative Commons CC0 1.0 Universal (public domain dedication)</a></li>
-                </ul>
-                <a role="button" href="//commons.wikimedia.org/wiki/Commons:First_steps/License_selection" target="_blank" class="btn btn-default">
-                  <span class="glyphicon glyphicon-question-sign" />
-                </a>
-              </div>
-            </div></div>
-            <p>I acknowledge that by doing so I grant anyone the right to use the work, even in a commercial product or otherwise, and to modify it according to their needs, provided that they abide by the terms of the license and any other applicable laws.</p>
-            <p>I am aware that this agreement is not limited to Wikipedia or related sites.</p>
-            <p id="iawattr">I am aware that the copyright holder always retains ownership of the copyright as well as the right to be attributed in accordance with the license chosen. Modifications others make to the work will not be claimed to have been made by the copyright holder.</p>
-            <p>I acknowledge that I cannot withdraw this agreement, and that the content may or may not be kept permanently on a Wikimedia project.</p>
-            <br />
-            <button type="button" class="btn btn-default btn-block" data-toggle="button" onclick="$('#iag').toggle();">I agree</button>
-            <br /><br />
-          </div>
-          <div class="col-md-4">
-            <div style="display:none;" id="iag">
-              <a role="button" class="btn btn-primary btn-block nt" onclick="s4v()">proceed to the next step</a>
-            </div>
-          </div>
-          <br />
-        </div>
-
-      </form> <!-- result -->
-      <div id="result" class="row hof">
-        <br />
-        step 5 of 5 [ <a href="#s1" class="smsc">start over</a> | <a href="//commons.wikimedia.org/wiki/Commons:Help_desk?action=edit&section=new&preloadtitle=help+with+Wikimedia+OTRS+release+generator+step+5" target="_blank">help</a> | <a href="//commons.wikimedia.org/wiki/User_talk:FDMS4?action=edit&section=new&preloadtitle=Wikimedia+OTRS+release+generator+feedback" target="_blank">feedback</a> ]
-        <br /><br />
-        <?php if (($s1 != "") && ($name != "") && !(($s1 == "2") && (($rep == "") || ($auth == ""))) && ($s2 != "") && !(($s2 == "1") && ($filer == "")) && ($s3 != "") && ($license != "")) {
-          $stats = fopen("stats/" . date('Y') . ".csv", "a");
-          fputcsv($stats, array (date("m-d"), $starttime, date("H:i:s"), $trn), ";");
-          fclose($stats);
-        ?>
-        <div class="col-md-7">
-          <p>If you have an eMail client installed, simply <b>click the button</b> to create the release eMail. If not (or nothing happens when you click the button), manually copy-and-paste the text in the green box below into an eMail to <a href="mailto:permissions-commons@wikimedia.org">permissions-commons@wikimedia.org</a>.</p>
-          <p>The eMail should come from an <b>eMail address that we can recognise as associated with the content being released</b>. For instance, if you are releasing images shown on a website, your eMail address should be associated with the website or listed on the contact page of the website; if you are releasing images on behalf of an organisation, your eMail address should be an official eMail address of the organisation.</p>
-          <br />
-          <?php
-            if ($s1 == "1") {
-                $p1s = ", $name, am";
+            var $s1fg1 = $("#s1fg1");
+            if (!$("#namei").val().match(/\S/)) {
+                if (!$s1fg1.hasClass("has-error")) {
+                    $s1fg1.addClass("has-error");
+                }
+                s1vi++;
             } else {
-                $p1s = " represent $rep,";
-                $p1s_ = "<br />$auth of $rep";
-                $p1s_m = "%0A$auth of $rep";
+                if ($s1fg1.hasClass("has-error")) {
+                    $s1fg1.removeClass("has-error");
+                }
             }
-            switch ($s3) {
-                case "1":
-                    $p2s = "the media work";
-                    break;
-                case "2":
-                    $p2s = "the work depicted in the media";
-                    break;
-                case "3":
-                    $p2s = "both the work depicted and the media";
-                    break;
+
+            if ($("#irep").css("display") !== "none") {
+
+                var $s1fg2 = $("#s1fg2");
+                if (!$("#repi").val().match(/\S/)) {
+                    if (!$s1fg2.hasClass("has-error")) {
+                        $s1fg2.addClass("has-error");
+                    }
+                    s1vi++;
+                } else {
+                    if ($s1fg2.hasClass("has-error")) {
+                        $s1fg2.removeClass("has-error");
+                    }
+                }
+
+                var $s1fg3 = $("#s1fg3");
+                if (!$("#authi").val().match(/\w/)) {
+                    if (!$s1fg3.hasClass("has-error")) {
+                        $s1fg3.addClass("has-error");
+                    }
+                    s1vi++;
+                } else {
+                    if ($s1fg3.hasClass("has-error")) {
+                        $s1fg3.removeClass("has-error");
+                    }
+                }
             }
-            if ($s2 == "1") {
-                $file = preg_replace("/(File:|(http|https):\/\/(commons|en).wiki(m|p)edia.org\/(wiki\/|w\/index\.php\?title=)File:)/", "", $filer);
-                $p3s = "<a href='//commons.wikimedia.org/wiki/File:" . rawurlencode(str_replace(" " , "_", $file)) . "' target='_blank'>https://commons.wikimedia.org/wiki/File:" . str_replace(" " , "_", $file) . "</a>";
-                $p3sm = "https:%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile:" . rawurlencode(str_replace(" " , "_", $file));
-                $subj = $file;
+            if (s1vi === 0) {
+                $("html, body").animate({
+                    scrollTop: $("#s2").offset().top
+                }, 400);
+            }
+        }
+
+        /**
+         * Validate the data of step 5 and get ajax infos
+         */
+        function s5v() {
+            if (!$("#licensei").val().match(/\w/)) {
+                var $s5fg = $("#s5fg");
+                if (!$s5fg.hasClass("has-error")) {
+                    $s5fg.addClass("has-error");
+                }
             } else {
-                $p3s = $p3sm = "attached to this eMail";
-                $subj = "release";
+                $("form").submit(); // TODO: Add AJAX here
             }
-            $b1 = "I hereby affirm that I$p1s the creator and/or sole owner of the exclusive copyright of $p2s $p3s.";
-            $b1m = "I hereby affirm that I$p1s the creator and/or sole owner of the exclusive copyright of $p2s $p3sm.";
-            $b2 = "I agree to publish the above-mentioned work under the $license.";
-            $b3 = "I acknowledge that by doing so I grant anyone the right to use the work, even in a commercial product or otherwise, and to modify it according to their needs, provided that they abide by the terms of the license and any other applicable laws.";
-            $b4 = "I am aware that this agreement is not limited to Wikipedia or related sites.";
-            if ($license != "Creative Commons CC0 1.0 Universal") {
-                $b5 = "<br />I am aware that the copyright holder always retains ownership of the copyright as well as the right to be attributed in accordance with the license chosen. Modifications others make to the work will not be claimed to have been made by the copyright holder.";
-                $b5m = "%0AI am aware that the copyright holder always retains ownership of the copyright as well as the right to be attributed in accordance with the license chosen. Modifications others make to the work will not be claimed to have been made by the copyright holder.";
-            }
-            $b6 = "I acknowledge that I cannot withdraw this agreement, and that the content may or may not be kept permanently on a Wikimedia project.";
-            $tracking = "[generated using relgen]";
-            echo "<div class='bg-success' style='padding:8px;'>$b1<br />$b2<br />$b3<br />$b4$b5<br />$b6<br /><br />$name$p1s_<br />" . date("Y-m-d") . "<br /><br />$tracking</div>";
-          ?>
-          <br /><br />
-        </div>
-        <div class="col-md-4">
-          <a role="button" href="mailto:permissions-commons@wikimedia.org?subject=<?=$subj?>&amp;body=<?=$b1m?>%0A<?=$b2?>%0A<?=$b3?>%0A<?=$b4?><?=$b5m?>%0A<?=$b6?>%0A%0A<?=$name?><?=$p1s_m?>%0A<?=date('Y-m-d')?>%0A%0A<?=$tracking?>" class="btn btn-default btn-block" style="width:100%;">create release eMail</a>
-        </div>
-        <?php
-            } else {
-                if ($name == "") echo "<p class='text-danger'>Error: No name specified!</p>";
-                if (($s1 == "2") && (($rep == "") || ($auth == ""))) echo "<p class='text-danger'>Error: No copyright holder and/or authority specified!</p>";
-                if (($s2 == "1") && ($filer == "")) echo "<p class='text-danger'>Error: No file name specified!</p>";
-                if ($license == "") echo "<p class='text-danger'>Error: No license specified!</p>";
-            }
-        ?>
-        <br />
-      </div>
-    </div>
-  </body>
+        }
+	</script>
+</head>
+<body>
+
+<div class="container">
+	<h1>Wikimedia OTRS<br /><small class="black-text">Générateur de déclaration de consentement
+		<a id="meta" tabindex="0" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="gray-text"
+		          data-content="Version francophone <small>(<a href='//github.com/ValentinBrclz/wikimedia-release-generator-fr'>GitHub</a>)</small><br />© (<a href='//github.com/ValentinBrclz/wikimedia-release-generator-fr/blob/master/LICENSE' target='_blank'>GNU GPL v2</a>) <a href='https://www.valentinberclaz.com' target='_blank'>Valentin Berclaz</a><br /><br /><br /><small>Basé sur <a href='//github.com/toollabs/relgen'>un projet</a> de <a href='//meta.wikimedia.org/wiki/User:FDMS4' target='_blank'>FDMS</a><br />© (<a href='//joinup.ec.europa.eu/sites/default/files/eupl1.1.-licence-en_0.pdf' target='_blank'>EUPL 1.1</a>) <a href='http://fdms.eu' target='_blank'>Stöger Florian D. M.</a></small>">0.0.1-beta</a></small>
+	</h1>
+
+	<form method="post" action="/generate.php">
+
+		<div id="s0" class="row hof"> <!-- step 0 -->
+			<br/>
+			<br/>
+			<div class="col-md-7">
+				<!-- TODO: add introduction texte -->
+				<br/>
+				<br/>
+				<a href="#s1" class="btn btn-primary btn-lg btn-block smsc nt">Commencer</a>
+				<input type="hidden" name="result" value="1"/>
+			</div>
+			<br/>
+		</div>
+
+		<div id="s1" class="row hof"> <!-- step 1: who am I and who is the copyright owner? -->
+			<br/>
+			étape 1 de 5
+			<br/><br/>
+			<div class="col-md-7">
+				<div class="button" data-toggle="buttons">
+					<label class="btn btn-default btn-block" onclick="$('#iam').show();$('#irep').hide();$('#idp').hide();$('#idk').hide();"><input type="radio" id="s11" name="s1" value="1"/>Je suis le détenteur des droits d'auteur</label>
+					<label class="btn btn-default btn-block" onclick="$('#iam').show();$('#irep').show();$('#idp').hide();$('#idk').hide();"><input type="radio" id="s12" name="s1" value="2"/>Je représente légalement le détenteur des droits d'auteur</label>
+					<label class="btn btn-default btn-block" onclick="$('#iam').hide();$('#irep').hide();$('#idp').show();$('#idk').hide();"><input type="radio" id="s13" name="s1" value="-1"/>Le détenteur des droits d'auteur m'a donné sa permission</label>
+					<label class="btn btn-default btn-block" onclick="$('#iam').hide();$('#irep').hide();$('#idp').hide();$('#idk').show();"><input type="radio" id="s14" name="s1" value="-2"/>Je ne connais pas le détenteur des droits d'auteur</label>
+				</div>
+				<br/>
+				<p>Le détenteur des droits d'auteur d'un texte ou d'une &oelig;vre multimédia est  <b>la personne qui l'a créé</b> (photographe, designer, paintre, auteur, …), sauf si les droits ont été explicitement transférés par une action juridique ou un contrat.</p>
+				<br/><br/>
+			</div>
+			<div class="col-md-4">
+				<div style="display:none;" id="iam">
+					mon nom<br/>
+					<div id="s1fg1" class="form-group"><input id="namei" name="name" placeholder="Jean Dupont (requis)" class="form-control"/></div>
+					<div style="display:none;" id="irep">
+						<br/>
+						détenteur des droits d'auteur<br/>
+						<div id="s1fg2" class="form-group"><input id="repi" name="rep" placeholder="Jean Dupont (requis)" class="form-control"/></div>
+						<br/>
+						<br/>
+						fonction / autorité
+						<div id="s1fg3" class="form-group"><input id="authi" name="auth" placeholder="Directeur, représentant légal, … (requis)" class="form-control"/></div>
+					</div>
+					<br/><br/>
+					<a class="btn btn-primary btn-block nt" onclick="s1v()">étape suivante</a>
+				</div>
+				<div style="display:none;" id="idp">
+					<p class="text-danger">Wikimedia OTRS ne peut accepter une autorisation qui ne provient pas <b>directement</b> du détenteur des droits ou d'une personne légalement habilitée à le représenter.</p>
+				</div>
+				<div style="display:none;" id="idk">
+					<p class="text-danger">Wikimedia OTRS ne peut accepter une déclaration de consentement de votre part ; veuillez rechercher et contacter le détenteur des droits d'auteur.</p>
+				</div>
+			</div>
+			<br/>
+		</div>
+
+		<div id="s2" class="row hof"> <!-- step 2 : file or media? -->
+			<br/>
+			étape 2 de 6
+			<br/><br/>
+			<div class="col-md-7">
+				<div class="button" data-toggle="buttons">
+					<label class="btn btn-default btn-block" onclick="$('#s2text').show();$('#s2media').hide();"><input type="radio" id="s21" name="s2" value="1"/>Il s'agit d'un texte pour la version francophone de Wikipédia.</label>
+					<label class="btn btn-default btn-block" onclick="$('#s2text').hide();$('#s2media').show();"><input type="radio" id="s22" name="s2" value="2"/>Il s'agit d'un fichier multimédia ou d'une &oelig;vre représentée.</label>
+				</div>
+				<br/>
+				<br/><br/>
+			</div>
+			<div class="col-md-4">
+				<div style="display:none;" id="s2text">
+					<a href="#s5" class="btn btn-primary btn-block smsc nt">étape suivante</a><!-- Skip media file steps -->
+				</div>
+				<div style="display:none;" id="s2media">
+					<a href="#s3" class="btn btn-primary btn-block smsc nt">étape suivante</a>
+				</div>
+			</div>
+			<br/>
+		</div>
+
+		<div id="s3" class="row hof"> <!-- step 3: where is the file? (not for text) -->
+			<br/>
+			étape 3 de 6
+			<br/><br/>
+			<div class="col-md-7">
+				<div class="button" data-toggle="buttons">
+					<label class="btn btn-default btn-block" onclick="$('#iup').show();$('#iatt').show();"><input type="radio" id="s31" name="s3" value="1"/>Le fichier est déjà téléchargé sur Wikimedia Commons</label>
+					<label class="btn btn-default btn-block" onclick="$('#iup').hide();$('#iatt').show();"><input type="radio" id="s32" name="s3" value="2"/>Je vais attacher le fichier au courriel</label>
+				</div>
+				<br/>
+				<p>Utilisez l'<a href="//commons.wikimedia.org/wiki/Special:UploadWizard" target="_blank"><b>UploadWizard</b></a> pour téléverser le fichier sur Wikimedia Commons si vous ne l'avez pas encore fait.</p>
+				<p>Pour évtier que votre fichier soit supprimé pendant que votre courriel de consentement attend d'être traité par la team Wikimédia OTRS, vous pouvez insérer <b><samp>{{subst:OP}}</samp></b> sur la page de description du fichier.</p>
+				<br/><br/>
+			</div>
+			<div class="col-md-4">
+				<div style="display:none;" id="iatt">
+					<div style="display:none;" id="iup">
+						Nom du fichier sur Wikimédia Commons<br/><input name="filer" placeholder="Exemple.jpg (requis)" class="form-control"/>
+						<br/><br/>
+					</div>
+					<a href="#s4" class="btn btn-primary btn-block smsc nt">étape suivante</a>
+				</div>
+			</div>
+			<br/>
+		</div>
+
+		<div id="s4" class="row hof"> <!-- step 4: media work or depicted work? -->
+			<br/>
+			étape 4 de 6
+			<br/><br/>
+			<div class="col-md-7">
+				<div class="button" data-toggle="buttons">
+					<label class="btn btn-default btn-block" onclick="$('#i4').show();"><input type="radio" id="s41" name="s4" value="1"/>Je souhaite libérer le fichier multimédia</label>
+					<label class="btn btn-default btn-block" onclick="$('#i4').show();"><input type="radio" id="s42" name="s4" value="2"/>Je souhaite libérer l'&oelig;vre représentée dans le fichier multimédia</label>
+					<label class="btn btn-default btn-block" onclick="$('#i4').show();"><input type="radio" id="s43" name="s4" value="3"/>Je souhaite libérer l'&oelig;vre représentée dans le fichier multimédia et le fichier lui-même</label>
+				</div>
+				<br/>
+				<p>Si le fichier multimédia montre ou inclus le travail de quelqu'un d'autre d'une manière non-triviale, c'est une <a href="//commons.wikimedia.org/wiki/Commons:%C5%92uvre_d%C3%A9riv%C3%A9e" target="_blank"><b>&oelig;vre dérivée</b></a> et une déclaration de consentement de l'auteur de l'&oelig;uvre représentée peut être nécessaire (sauf si elle est dans le domaine public).</p>
+				<p>Dans certains pays <small>(pas en France)</small>, grâce à la <a href="//commons.wikimedia.org/wiki/Commons:Freedom_of_panorama/fr" target="_blank"><b>liberté de panorama</b></a>, les architectures et autres &oelig;uvres d'art disposées de manière permanente dans un espace public sont exemptées de cette exigence.</p>
+				<br/><br/>
+			</div>
+			<div class="col-md-4">
+				<div style="display:none;" id="i4">
+					<a href="#s5" class="btn btn-primary btn-block smsc nt">étape suivante</a>
+				</div>
+			</div>
+			<br/>
+		</div>
+
+		<div id="s5" class="row hof"> <!-- step 5: which license? -->
+			<br/>
+			étape 5 de 6
+			<br/><br/>
+			<div class="col-md-7">
+				<label for="licensei">J'accepte de publier le contenu dont il est question sous la licence libre :</label>
+				<div id="s5fg" class="form-group">
+					<div class="input-group">
+						<input id="licensei" name="license" value="Creative Commons Attribution-ShareAlike 4.0 International" class="form-control"/>
+						<div class="input-group-btn">
+							<a data-toggle="dropdown" class="btn btn-default"><i class="caret"></i></a>
+							<ul class="dropdown-menu dropdown-menu-right">
+								<li><a onclick="$('#licensei').val($(this).text()); $('#iawattr').show();">Creative Commons Attribution - Partage à l'identique 4.0 International</a></li>
+								<li><a onclick="$('#licensei').val($(this).text()); $('#iawattr').show();">Creative Commons Attribution 4.0 International</a></li>
+								<li><a onclick="$('#licensei').val($(this).text()); $('#iawattr').hide();">Creative Commons CC0 1.0 Universal (équivalent au domaine public)</a></li>
+							</ul>
+							<a href="//commons.wikimedia.org/wiki/Commons:Premiers_pas/S%C3%A9lection_d%27une_licence" target="_blank" class="btn btn-default">
+								<i class="glyphicon glyphicon-question-sign" title="Informations sur les licenses"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<p>Je comprends qu'en faisant cela je permets à quiconque d'utiliser mon œuvre dans un but commercial, et de la modifier dans la mesure des exigences imposées par la licence.</p>
+				<p id="iawattr">Je suis conscient de toujours jouir des droits extra-patrimoniaux sur mon œuvre, et garder le droit d'être cité pour celle-ci selon les termes de la licence retenue. Les modifications que d'autres pourront faire ne me seront pas attribuées.</p>
+				<p>Je suis conscient qu'une licence libre concerne seulement les droits patrimoniaux de l'auteur, et je garde la capacité d'agir envers quiconque n'emploierait pas ce travail d'une manière autorisée, ou dans la violation des droits de la personne, des restrictions de marque déposée, etc.</p>
+				<p>Je comprends que je ne peux pas retirer cette licence, et que l'image est susceptible d'être conservée de manière permanente par n'importe quel projet de la fondation Wikimedia.</p>
+				<br/>
+				<button type="button" class="btn btn-default btn-block" data-toggle="button" onclick="$('#iag').toggle();">I agree</button>
+				<br/><br/>
+			</div>
+			<div class="col-md-4">
+				<div style="display:none;" id="iag">
+					<input type="submit" class="btn btn-primary btn-block nt" onclick="s5v()" value="Générer la déclaration de consentement" />
+				</div>
+			</div>
+			<br/>
+		</div>
+
+	</form> <!-- result -->
+	<div id="result" class="row hof">
+		<br/>
+		étape 6 de 6 [ <a href="#s1" class="smsc">recommencer</a> ]
+		<br/><br/>
+		<div class="col-md-7">
+			<!-- TODO: Translate this part -->
+			<p>If you have an eMail client installed, simply <b>click the button</b> to create the release eMail. If not (or nothing happens when you click the button), manually copy-and-paste the text in the green box below into an eMail to <a href="mailto:permissions-fr@wikimedia.org">permissions-fr@wikimedia.org</a>.
+			</p>
+			<p>The eMail should come from an <b>eMail address that we can recognise as associated with the content being released</b>. For instance, if you are releasing images shown on a website, your eMail address should be associated with the website or listed on the contact page of the website;
+				if you are releasing images on behalf of an organisation, your eMail address should be an official eMail address of the organisation.</p>
+			<br/>
+			<div id="ajax-text" class="bg-success" style="padding:8px;">
+				[AJAX]
+			</div>
+		</div>
+		<br/><br/>
+			<div class="col-md-4" id="ajax-button">
+				<a href="mailto:permissions-fr@wikimedia.org?subject=Déclaration de consentement - [TYPE]&amp;body=<?=$b1m?>%0A<?=$b2?>%0A<?=$b3?>%0A<?=$b4?><?=$b5m?>%0A<?=$b6?>%0A%0A<?=$name?><?=$p1s_m?>%0A<?=date('Y-m-d')?>%0A%0A<?=$tracking?>" class="btn btn-default btn-block" style="width:100%;">envoyer le courriel de déclaration de consentement</a>
+			</div>
+		<br/>
+	</div>
+</div>
+</body>
 </html>
