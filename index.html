@@ -1,12 +1,31 @@
-<?php
-    if (isset($_GET['source'])) {show_source(__FILE__); exit();}
-    /**
-     * @author Stöger Florian D. M. (http://fdms.eu)
-     * @license EUPL 1.1 (//joinup.ec.europa.eu/sites/default/files/eupl1.1.-licence-en_0.pdf)
-     * @copyright © (//joinup.ec.europa.eu/sites/default/files/eupl1.1.-licence-en_0.pdf) Stöger Florian D. M. (http://fdms.eu)
-     */
-?>
 <!DOCTYPE HTML>
+<!--
+/*
+ * wikimedia-release-generator-fr
+ *
+ * Wikipedia FR and Wikimedia french release generator
+ * Copyright (C) 2017 Valentin Berclaz
+ * <http://www.valentinberclaz.com/>
+ *
+ * Contributors:
+ * <https://github.com/ValentinBrclz/wikimedia-release-generator-fr/commits>
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+ -->
 <html>
   <head>
     <title>Wikimedia OTRS release generator</title>
@@ -50,7 +69,7 @@
               }
           });
       });
-      
+
       function s1v() {
           s1vi = 0;
           if (!$("#namei").val().match(/\S/)) {
@@ -104,48 +123,9 @@
   </head>
   <body style="background: url('bg.png') no-repeat fixed right bottom; overflow:hidden;">
 
-    <?php
-        $relgen = "0.9.9";
-        date_default_timezone_set("UTC");
-        $starttime = date("H:i:s");
-        $trn = $name = $rep = $auth = $filer = $license = $s1 = $s2 = $s3 = "";
-        
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $starttime = test_input($_POST["starttime"]);
-            $trn = test_input($_POST["trn"]);
-            $name = test_input($_POST["name"]);
-            $rep = test_input($_POST["rep"]);
-            $auth = test_input($_POST["auth"]);
-            $filer = test_input($_POST["filer"]);
-            $license = test_input($_POST["license"]);
-            $s1 = test_input($_POST["s1"]);
-            $s2 = test_input($_POST["s2"]);
-            $s3 = test_input($_POST["s3"]);
-        }
-        
-        function test_input($data) {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
-        
-        if ($_POST["result"] == "1") {
-            ?>
-            <script type="text/javascript">
-            $(function() {
-                $("html, body").animate({
-                    scrollTop: $(result).offset().top
-                }, 400);
-            });
-            </script>
-            <?php
-        }
-    ?>
-
-    <div class="container">
+      <div class="container">
       <h1>Wikimedia OTRS release generator <small><a id="meta" tabindex="0" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="created and maintained by <a href='//meta.wikimedia.org/wiki/User:FDMS4' target='_blank'>FDMS</a><br />© (<a href='//joinup.ec.europa.eu/sites/default/files/eupl1.1.-licence-en_0.pdf' target='_blank'>EUPL 1.1</a>) <a href='http://fdms.eu' target='_blank'>Stöger Florian D. M.</a>" style="color:#777;"><?=$relgen?></a></small></h1>
-  
+
       <form method="post" action="//tools.wmflabs.org/relgen/index.php">
 
         <div id="s0" class="row hof"> <!-- step 0 -->
