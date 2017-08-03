@@ -177,6 +177,26 @@
         }
 
         /**
+         * Validate the data of second step
+         */
+        function s3v() {
+            var $s3fg1 = $("#s3fg1");
+            if (!$("#filer").val().match(/\S/) && $('input[name=s3]:checked').val() === "1") {
+                if (!$s3fg1.hasClass("has-error")) {
+                    $s3fg1.addClass("has-error");
+                }
+            } else {
+                if ($s3fg1.hasClass("has-error")) {
+                    $s3fg1.removeClass("has-error");
+                }
+
+                $("html, body").animate({
+                    scrollTop: $("#s4").offset().top
+                }, 400);
+            }
+        }
+
+        /**
          * Validate the data of step 5 and get ajax infos
          */
         function s5v() {
@@ -376,7 +396,7 @@
 					page(s) Wikipédia concernée(s)
 					<div id="s2fg2" class="form-group"><input id="textpage" name="textpage" placeholder=" (requis)" class="form-control"/></div>
 					<br/><br/>
-					<a href="#s5" class="btn btn-primary btn-block smsc nt" onclick="s2v()">étape suivante</a><!-- Skip media file steps -->
+					<a class="btn btn-primary btn-block smsc nt" onclick="s2v()">étape suivante</a><!-- Skip media file steps -->
 				</div>
 				<div style="display:none;" id="s2media">
 					<a href="#s3" class="btn btn-primary btn-block smsc nt">étape suivante</a>
@@ -402,10 +422,11 @@
 			<div class="col-md-4">
 				<div style="display:none;" id="iatt">
 					<div style="display:none;" id="iup">
-						Nom du fichier sur Wikimédia Commons<br/><input id="filer" name="filer" placeholder="Exemple.jpg (requis)" class="form-control"/>
+						Nom du fichier sur Wikimédia Commons<br/>
+						<div id="s3fg1" class="form-group"><input id="filer" name="filer" placeholder="Exemple.jpg (requis)" class="form-control"/></div>
 						<br/><br/>
 					</div>
-					<a href="#s4" class="btn btn-primary btn-block smsc nt">étape suivante</a>
+					<a class="btn btn-primary btn-block smsc nt" onclick="s3v()">étape suivante</a>
 				</div>
 			</div>
 			<br/>
