@@ -4,10 +4,8 @@ wikimedia-release-generator-fr
 
 Générateur francophone de déclaration de consentement pour libérer textes et fichiers multimédias sous des licences libres dans le cadre de Wikipédia Francophone et Wikimédia Commons
 
-[Here](https://github.com/toollabs/relgen) is the official relgen tool by FDMS.
+## Droits d'auteur
+© ([GNU GPL v2](//github.com/ValentinBrclz/wikimedia-release-generator-fr/blob/master/LICENSE)) [Valentin Berclaz](https://github.com/ValentinBrclz), basé sur [Relgen](https://github.com/toollabs/relgen) © ([EUPL 1.1](//joinup.ec.europa.eu/sites/default/files/eupl1.1.-licence-en_0.pdf)) [Stöger Florian D. M.](http://fdms.eu)
 
-## License
-* License: GNU General Public Licence (2.0)
-* Author: [Valentin Berclaz](https://github.com/ValentinBrclz)
-* Contributing: see [CONTRIBUTING.md](https://github.com/ValentinBrclz/wikimedia-release-generator-fr/blob/master/CONTRIBUTING.md) file
-* Based on: [Relgen](https://github.com/toollabs/relgen), from FDMS, Stöger Florian D. M. (http://fdms.eu)
+## Disclaimer
+"Wikipédia" et "Wikimédia" sont des marques enregistrées par la *Wikimedia Foundation*. L'utilisation de celles-ci dans le présent projet n'implique pas une quelconque affilitation, une approbation ou un soutien de la part de leur possesseur. 
