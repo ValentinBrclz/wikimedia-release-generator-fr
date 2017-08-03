@@ -1,11 +1,11 @@
 [
     {
-      "name" : "relgen",
-      "title" : "Wikimedia OTRS release generator",
+      "name" : "wikimedia-release-generator-fr",
+      "title" : "Wikimedia OTRS - Générateur de déclaration de consentement",
       "description" : "Generates release eMails to be sent to OTRS.",
-      "url" : "https://tools.wmflabs.org/relgen",
+      "url" : "https://tools.wmflabs.org/permission-fr",
       "keywords" : "otrs, copyright, commons",
-      "author" : "FDMS",
-      "repository" : "https://github.com/Toollabs/relgen"
+      "author" : "Brclz",
+      "repository" : "https://github.com/ValentinBrclz/wikimedia-release-generator-fr"
     }
 ]
